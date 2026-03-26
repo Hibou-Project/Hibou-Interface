@@ -11,9 +11,17 @@
     "errorInvalid": "Identifiant ou mot de passe invalide.",
     "errorGeneric": "Une erreur s'est produite. Veuillez réessayer."
   },
+  "theme": {
+    "toggle": "Basculer le thème clair ou sombre"
+  },
+  "settings": {
+    "title": "Paramètres"
+  },
   "sidebar": {
     "dashboard": "Tableau de bord",
     "settings": "Paramètres",
+    "switchToFrench": "Français",
+    "switchToEnglish": "English",
     "logout": "Se déconnecter"
   }
 }

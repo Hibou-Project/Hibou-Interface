@@ -37,7 +37,8 @@ class Settings:
             ).split(",")
             if origin.strip()
         )
-        self.zmq_pub_bind = os.getenv("ZMQ_PUB_BIND", "tcp://*:5556")
+        self.zmq_sub_string = os.getenv("ZMQ_SUB_STRING", "tcp://127.0.0.1:5557")
+        self.zmq_pub_string = os.getenv("ZMQ_PUB_STRING", "tcp://127.0.0.1:5556")
 
 
 @lru_cache

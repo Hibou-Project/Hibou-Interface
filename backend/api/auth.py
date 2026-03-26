@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import Response
 
-from config import get_settings
+from core.config import get_settings
 from core.cookies import attach_refresh_cookie, clear_refresh_cookie
 from core.dependencies import bearer_scheme, get_current_user, get_db
 from models import User

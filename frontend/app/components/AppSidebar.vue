@@ -1,7 +1,7 @@
 <template>
   <Sidebar collapsible="offcanvas" :variant="variant">
-    <SidebarHeader>
-      <SidebarMenu>
+    <SidebarHeader class="flex flex-row items-center gap-1">
+      <SidebarMenu class="min-w-0 flex-1">
         <SidebarMenuItem>
           <SidebarMenuButton as-child class="data-[slot=sidebar-menu-button]:!p-1.5">
             <NuxtLink :to="localePath('/dashboard')">
@@ -11,6 +11,7 @@
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
+      <ThemeToggle />
     </SidebarHeader>
     <SidebarContent>
       <SidebarGroup>
@@ -51,7 +52,7 @@
             </DropdownMenuTrigger>
             <DropdownMenuContent
               class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-              :side="isMobile ? 'bottom' : 'right'"
+              side="bottom"
               :side-offset="4"
             >
               <DropdownMenuLabel class="p-0 font-normal">
@@ -69,6 +70,10 @@
                 </template>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem @click="toggleLocale">
+                <Languages class="size-4" />
+                {{ localeSwitchLabel }}
+              </DropdownMenuItem>
               <DropdownMenuItem @click="onLogout">
                 <LogOut class="size-4" />
                 {{ t('sidebar.logout') }}
@@ -82,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutDashboard, AudioLines, Settings, LogOut } from 'lucide-vue-next'
+import { LayoutDashboard, AudioLines, Settings, LogOut, Languages } from 'lucide-vue-next'
 import type { SidebarProps } from '@/components/ui/sidebar'
 import {
   Sidebar,
@@ -94,7 +99,6 @@ import {
   SidebarMenuItem,
   SidebarGroup,
   SidebarGroupContent,
-  useSidebar,
 } from '@/components/ui/sidebar'
 import { useUserStore } from '../stores/user'
 
@@ -105,9 +109,17 @@ withDefaults(
   { variant: 'inset' }
 )
 
-const { t } = useI18n()
+const { t, locale, setLocale } = useI18n()
 const localePath = useLocalePath()
 const userStore = useUserStore()
+
+const localeSwitchLabel = computed(() =>
+  locale.value === 'en' ? t('sidebar.switchToFrench') : t('sidebar.switchToEnglish')
+)
+
+async function toggleLocale() {
+  await setLocale(locale.value === 'en' ? 'fr' : 'en')
+}
 
 const items = computed(() => [
   {
@@ -132,6 +144,4 @@ async function onLogout() {
   await userStore.logout()
   await navigateTo(localePath('/'))
 }
-
-const { isMobile } = useSidebar()
 </script>

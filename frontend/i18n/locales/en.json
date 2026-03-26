@@ -11,9 +11,17 @@
     "errorInvalid": "Invalid identifier or password.",
     "errorGeneric": "Something went wrong. Please try again."
   },
+  "theme": {
+    "toggle": "Toggle light and dark theme"
+  },
+  "settings": {
+    "title": "Settings"
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "settings": "Settings",
+    "switchToFrench": "French",
+    "switchToEnglish": "English",
     "logout": "Log out"
   }
 }

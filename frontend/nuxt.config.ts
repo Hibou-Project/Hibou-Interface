@@ -6,14 +6,6 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  app: {
-    head: {
-      htmlAttrs: {
-        class: 'dark',
-      },
-      meta: [{ name: 'color-scheme', content: 'dark' }],
-    },
-  },
   css: ['~/assets/css/tailwind.css'],
   vite: {
     plugins: [tailwindcss()],

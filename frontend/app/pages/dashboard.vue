@@ -30,15 +30,23 @@
         </div>
       </div>
     </div>
+    <Card class="w-xl p-4 mt-4">
+      <h1>Test event</h1>
+      <Input v-model="event" type="text" placeholder="Test event" />
+      <Button @click="ws.send(event)">Send</Button>
+    </Card>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ExternalLink } from 'lucide-vue-next'
 
+
 definePageMeta({
   middleware: ['auth'],
 })
+
+const event = ref('')
 
 const systemStatus = ref([
   {
@@ -55,4 +63,13 @@ const systemStatus = ref([
     status: true,
   },
 ])
+
+const ws = new WebSocket("ws://localhost:8000/events/ws")
+
+ws.onmessage = (e) => {
+    console.log(e)
+}
+
+console.log(ws)
+
 </script>

@@ -1,6 +1,6 @@
 from starlette.responses import Response
 
-from config import get_settings
+from core.config import get_settings
 
 
 def attach_refresh_cookie(response: Response, token: str) -> None:
