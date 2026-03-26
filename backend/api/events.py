@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, Security, status, WebSocket, WebSocketDisconnect
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
 from services.ipc_forwarder.zeromq import ZMQForwarder
 
 router = APIRouter()
+
 
 class ConnectionManager:
     def __init__(self, ipc: ZMQForwarder):
@@ -42,9 +42,3 @@ websocket_manager = ConnectionManager(ipc=ZMQForwarder())
 @router.websocket("/ws")
 async def websocket_endpoint(ws: WebSocket):
     await websocket_manager.connect(ws)
-    try:
-        while True:
-            data = await ws.receive_text()
-            await websocket_manager.send_over_ipc(data)
-    except WebSocketDisconnect:
-        websocket_manager.disconnect(ws)
