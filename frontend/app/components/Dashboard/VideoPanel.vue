@@ -3,7 +3,7 @@
     class="relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-lg border border-border bg-black/80"
   >
     <div
-      class="absolute right-2 top-2 z-10 flex gap-1 rounded-md border border-border/80 bg-background/90 p-0.5 shadow-sm backdrop-blur-sm"
+      class="absolute right-4 top-4 z-10 flex gap-1 rounded-md border border-border/80 bg-background/90 p-0.5 shadow-sm backdrop-blur-sm"
     >
       <button
         type="button"
