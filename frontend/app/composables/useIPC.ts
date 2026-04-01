@@ -1,9 +1,10 @@
 import { createSharedComposable, useWebSocket } from '@vueuse/core'
+import type { IPCEvent } from '~/types/ipc'
 import { eventsWebSocketUrl } from '~/utils/websocket'
 
 const EVENTS_WS_PATH = '/events/ws'
 
-type Subscriber = [(event: Event) => void, string]
+type Subscriber = [(event: IPCEvent) => void, string]
 
 const useSharedIPC = createSharedComposable(() => {
   const config = useRuntimeConfig()
@@ -25,16 +26,17 @@ const useSharedIPC = createSharedComposable(() => {
     onConnected: () => console.log('connected'),
     onError: (ws, event) => console.error('WebSocket error', event),
     onMessage: (_ws, event) => {
+      const msg: IPCEvent = { data: String(event.data) }
       subscribers.value.forEach((subscriber: Subscriber) => {
         const [callback, filter] = subscriber
-        if (event.data.startsWith(filter)) {
-          callback(event)
+        if (msg.data.startsWith(filter)) {
+          callback(msg)
         }
       })
     },
   })
 
-  const addSubscriber = (callback: (event: Event) => void, filter: string = '') => {
+  const addSubscriber = (callback: (event: IPCEvent) => void, filter: string = '') => {
     subscribers.value.push([callback, filter])
   }
 
