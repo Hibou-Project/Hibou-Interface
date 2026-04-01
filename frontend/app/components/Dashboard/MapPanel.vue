@@ -42,13 +42,7 @@ const { data: settings, pending: isLoading } = await useAsyncData<SystemSettings
 )
 
 const angle = ref(90)
-
-const droneAngle = ref(10)
-onMounted(() => {
-  setInterval(() => {
-    droneAngle.value = (droneAngle.value - 1) % 360
-  }, 500)
-})
+const droneAngle = ref<number | null>(null)
 
 const { syncFromSettings } = useMapboxSystemMap(mapContainer, {
   accessToken,
@@ -73,4 +67,13 @@ addSubscriber((event) => {
   if (Number.isNaN(azimuth)) return
   angle.value = azimuth
 }, 'vision_angle')
+addSubscriber((event) => {
+  const data = event.data.split(' ')[1]
+  if (!data) return
+  const [azimuthRaw = ''] = data.split(',')
+  if (azimuthRaw === 'None') droneAngle.value = null
+  const azimuth = parseFloat(azimuthRaw)
+  if (Number.isNaN(azimuth)) return
+  droneAngle.value = azimuth
+}, 'decision_angle')
 </script>

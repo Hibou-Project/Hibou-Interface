@@ -162,7 +162,7 @@ export function useMapboxSystemMap(
     /** Degrees clockwise from north; line is drawn from system center along this bearing. */
     bearingDeg: Ref<number>
     /** Drone heading: spoke + filled cone (sector) from center along this bearing. */
-    droneBearingDeg: Ref<number>
+    droneBearingDeg: Ref<number | null>
   }
 ) {
   const { accessToken, enabled, settings, bearingDeg, droneBearingDeg } = options
@@ -370,6 +370,11 @@ export function useMapboxSystemMap(
       return
     }
     const b = droneBearingDeg.value
+    if (!b) {
+      clearDroneLineData(map)
+      clearDroneConeData(map)
+      return
+    }
     setDroneCone(map, v.lng, v.lat, b)
     setDroneLine(map, v.lng, v.lat, b)
   }
