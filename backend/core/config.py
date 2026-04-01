@@ -40,6 +40,16 @@ class Settings(BaseSettings):
     zmq_sub_string: str = "tcp://127.0.0.1:5557"
     zmq_pub_string: str = "tcp://127.0.0.1:5556"
 
+    # SUB connects here; vision process binds the corresponding PUB sockets (trusted local IPC/TCP).
+    vision_zmq_raw: str = "tcp://127.0.0.1:5560"
+    vision_zmq_annotated: str = "tcp://127.0.0.1:5561"
+
+    ptz_username: str = "admin"
+    ptz_password: str = "useruser1"
+    ptz_host: str = "192.168.250.30"
+    ptz_video_channel: int = 1
+    ptz_rtsp_port: int = 554
+
     @field_validator("cookie_secure", mode="before")
     @classmethod
     def parse_cookie_secure(cls, v: object) -> bool:

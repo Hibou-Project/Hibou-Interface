@@ -67,6 +67,8 @@
   "dashboard": {
     "videoTitle": "Video feed",
     "videoPlaceholder": "No stream connected.",
+    "videoNeedToken": "Sign in to view the camera stream.",
+    "videoStreamFailed": "Could not load the stream. Ensure the vision publisher is running and VISION_ZMQ_RAW / VISION_ZMQ_ANNOTATED match its PUB addresses.",
     "mapMissingToken": "Set NUXT_PUBLIC_MAPBOX_ACCESS_TOKEN to show the map."
   },
   "sidebar": {

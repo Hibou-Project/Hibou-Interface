@@ -13,5 +13,7 @@ dependencies = [
     "python-jose[cryptography]>=3.5.0",
     "python-multipart>=0.0.22",
     "sqlalchemy[asyncio]>=2.0.48",
-    "zmq>=0.0.0",
+    "pyzmq>=26.0.0",
+    "numpy>=2.0.0",
+    "opencv-python-headless>=4.10.0",
 ]

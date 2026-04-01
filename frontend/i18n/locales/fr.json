@@ -67,6 +67,8 @@
   "dashboard": {
     "videoTitle": "Flux vidéo",
     "videoPlaceholder": "Aucun flux pour le moment.",
+    "videoNeedToken": "Connectez-vous pour voir le flux de la caméra.",
+    "videoStreamFailed": "Impossible de charger le flux. Vérifiez que le service vision publie bien sur ZMQ et que VISION_ZMQ_RAW / VISION_ZMQ_ANNOTATED correspondent aux adresses PUB.",
     "mapMissingToken": "Définissez NUXT_PUBLIC_MAPBOX_ACCESS_TOKEN pour afficher la carte."
   },
   "sidebar": {
