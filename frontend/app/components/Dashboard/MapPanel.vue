@@ -41,7 +41,7 @@ const { data: settings, pending: isLoading } = await useAsyncData<SystemSettings
   () => settingsRepo.getSystem()
 )
 
-const defaultAngleComputer = 120
+const defaultAngleComputer = 70
 const defaultAngleDrone = 140
 const angle = ref(0)
 const droneAngle = ref<number | null>(null)
@@ -83,11 +83,11 @@ addSubscriber((event) => {
   console.log(droneAngle.value)
 }, 'decision_angle')
 addSubscriber((event) => {
-  const detections = event.data.split(',').map(Number)
-  if (detections.some(Boolean)) {
-    hasDetections.value = true
-  } else {
-    hasDetections.value = false
-  }
+  // const detections = event.data.split(',').map(Number)
+  // if (detections.some(Boolean)) {
+  //   hasDetections.value = true
+  // } else {
+  //   hasDetections.value = false
+  // }
 }, 'acoustic_detection')
 </script>

@@ -171,10 +171,8 @@ function applySystemStatusPayload(payload: string) {
   }
 }
 
-const isDemo = false
 const acousticDetections = ref<number[]>([])
 const acousticDetectionsDemo = computed(() => {
-  if (isDemo) return [0, 0, 0, 0]
   return acousticDetections.value
 })
 
