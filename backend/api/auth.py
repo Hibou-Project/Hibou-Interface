@@ -28,6 +28,11 @@ router = APIRouter()
 
 @router.post("/register", response_model=UserPublic, status_code=status.HTTP_201_CREATED)
 async def register(payload: RegisterRequest, db: AsyncSession = Depends(get_db)) -> User:
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail="Registration is currently disabled",
+    )
+
     result = await db.execute(select(User).where(User.identifier == payload.identifier))
     existing_user = result.scalar_one_or_none()
     if existing_user is not None:

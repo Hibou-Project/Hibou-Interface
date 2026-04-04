@@ -34,8 +34,8 @@ class ZMQForwarder:
             except Exception as e:
                 print(f"[broadcaster] error: {e}")
 
-    def publish(self, message: str):
+    async def publish(self, message: str):
         print(f"[ZMQForwarder] Publishing message: {message}")
-        self.pub.send(message.encode())
+        await self.pub.send(message.encode())
 
 

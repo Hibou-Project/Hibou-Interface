@@ -30,14 +30,14 @@ class ConnectionManager:
         self.clients.remove(ws)
 
     async def broadcast(self, message: str):
-        for client in self.clients:
+        for client in list(self.clients):
             try:
                 await client.send_text(message)
             except Exception:
-                pass
+                self.disconnect(client)
 
     async def send_over_ipc(self, message: str):
-        self.ipc_forwarder.publish(message)
+        await self.ipc_forwarder.publish(message)
 
 websocket_manager = ConnectionManager(ipc=ZMQForwarder())
 
